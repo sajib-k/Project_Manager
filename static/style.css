@@ -1,0 +1,460 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ============ LOGIN PAGE ============ */
+body:not(.dashboard) {
+    background-image: url("/static/images/bg.jpg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+body:not(.dashboard)::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    top: 0;
+    left: 0;
+}
+
+.container {
+    width: 350px;
+    background: rgba(30, 41, 59, 0.95);
+    padding: 30px;
+    border-radius: 12px;
+    color: white;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.container h1 {
+    margin-bottom: 5px;
+    font-size: 28px;
+}
+
+.sub {
+    color: #94a3b8;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form Elements */
+label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: white;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #84cc16;
+    background: #1a2332;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.login-btn, .add-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background: #84cc16;
+    border: none;
+    border-radius: 6px;
+    color: #000;
+    font-weight: 600;
+}
+
+.login-btn:hover, .add-btn:hover {
+    background: #a3e635;
+    transform: translateY(-2px);
+}
+
+.forgot {
+    font-size: 12px;
+    color: #38bdf8;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.google, .linkedin, .github {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background: transparent;
+    border: 1px solid #84cc16;
+    color: white;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.google:hover, .linkedin:hover, .github:hover {
+    background: rgba(132, 204, 22, 0.1);
+    border-color: #a3e635;
+}
+
+.signup {
+    text-align: center;
+    margin-top: 15px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.signup span {
+    color: #84cc16;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.signup span:hover {
+    text-decoration: underline;
+}
+
+.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid #ef4444;
+    color: #fca5a5;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    background-color: rgba(30, 41, 59, 0.95);
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    color: white;
+}
+
+.close {
+    color: #cbd5e1;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #84cc16;
+}
+
+/* ============ DASHBOARD PAGE ============ */
+body.dashboard {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    min-height: 100vh;
+}
+
+body.dashboard .container {
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    display: flex;
+    box-shadow: none;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: rgba(15, 23, 42, 0.95);
+    padding: 20px;
+    border-right: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h3 {
+    color: #84cc16;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.sidebar a {
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.sidebar a:hover {
+    background: rgba(132, 204, 22, 0.1);
+    color: #84cc16;
+    padding-left: 20px;
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.topbar h2 {
+    color: white;
+    font-size: 28px;
+}
+
+.add-btn {
+    background: #84cc16;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* Cards */
+.card {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid #334155;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: #84cc16;
+    box-shadow: 0 0 20px rgba(132, 204, 22, 0.2);
+}
+
+.card h3 {
+    color: #84cc16;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #cbd5e1;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 8px 15px;
+    border: 1px solid #334155;
+    background: transparent;
+    color: #cbd5e1;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.edit-btn:hover {
+    background: rgba(132, 204, 22, 0.1);
+    border-color: #84cc16;
+    color: #84cc16;
+}
+
+.delete-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #fca5a5;
+}
+
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.no-projects {
+    color: #94a3b8;
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 40px;
+}
+
+.no-projects a {
+    color: #84cc16;
+    text-decoration: none;
+}
+
+.no-projects a:hover {
+    text-decoration: underline;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancel-btn {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    border-radius: 6px;
+}
+
+.cancel-btn:hover {
+    background: rgba(51, 65, 85, 0.5);
+    border-color: #cbd5e1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body.dashboard .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #334155;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 15px;
+    }
+
+    .sidebar h3 {
+        margin-bottom: 0;
+    }
+
+    .sidebar a {
+        padding: 8px 12px;
+        margin: 0 5px;
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topbar button {
+        margin-top: 10px;
+    }
+
+    .projects-container {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 90%;
+    }
+}
+/* ================= PROJECT IMAGE ================= */
+
+.project-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #334155;
+}
+
+/* ================= PROJECT LINK ================= */
+
+.project-link {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #84cc16;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.project-link:hover {
+    color: #a3e635;
+    text-decoration: underline;
+}

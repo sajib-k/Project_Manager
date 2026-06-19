@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Project Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Welcome back!</h1>
+    <p class="sub">Sign into your account</p>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <!-- Login Form -->
+    <form method="POST" action="/login">
+
+        <label>Username</label>
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter username"
+            required
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            required
+        >
+
+        <button type="submit" class="login-btn">
+            Log In
+        </button>
+
+    </form>
+
+    <p class="signup">
+        Don't have an account?
+        <span onclick="toggleSignup()">Sign up</span>
+    </p>
+
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="toggleSignup()">
+            &times;
+        </span>
+
+        <h2>Create Account</h2>
+
+        <form method="POST" action="/signup">
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Choose username"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create password"
+                required
+            >
+
+            <button type="submit" class="login-btn">
+                Sign Up
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function toggleSignup() {
+
+    let modal = document.getElementById('signupModal');
+
+    if (modal.style.display === 'block') {
+        modal.style.display = 'none';
+    } else {
+        modal.style.display = 'block';
+    }
+
+}
+
+</script>
+
+</body>
+</html>
