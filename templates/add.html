@@ -1,93 +1,93 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Add Project - Project Manager</title>
+    <title>Add Course - Course Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body class="dashboard">
 
-    <div class="container">
+<div class="container">
 
-        <div class="sidebar">
-            <h3>📋 Project Manager</h3>
+```
+<div class="sidebar">
 
-            <a href="/home">🏠 Home</a>
-            <a href="/add">➕ Add Project</a>
-            <a href="/logout">🚪 Logout</a>
-        </div>
+    <h3>🎓 Course Manager</h3>
 
-        <div class="main">
+    <a href="/home">🏠 Dashboard</a>
+    <a href="/add">➕ Add Course</a>
+    <a href="/logout">🚪 Logout</a>
 
-            <div class="topbar">
-                <h2>Add New Project</h2>
-            </div>
+</div>
 
-            <div class="card">
+<div class="main">
 
-                <form method="POST">
+    <div class="topbar">
+        <h2>Add New Course</h2>
+    </div>
 
-                    <div class="form-group">
-                        <label for="project_name">Project Name</label>
-                        <input
-                            type="text"
-                            id="project_name"
-                            name="project_name"
-                            placeholder="Enter project name"
-                            required>
-                    </div>
+    <div class="card">
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea
-                            id="description"
-                            name="description"
-                            placeholder="Enter project description"
-                            rows="5"
-                            required></textarea>
-                    </div>
+        <form method="POST">
 
-                    <div class="form-group">
-                        <label for="project_link">Project Link</label>
-                        <input
-                            type="url"
-                            id="project_link"
-                            name="project_link"
-                            placeholder="https://example.com">
-                    </div>
+            <div class="form-group">
 
-                    <div class="form-group">
-                        <label for="project_image">Project Image URL</label>
-                        <input
-                            type="url"
-                            id="project_image"
-                            name="project_image"
-                            placeholder="https://example.com/image.jpg">
-                    </div>
+                <label for="course_name">
+                    Course Name
+                </label>
 
-                    <div class="form-buttons">
-                        <button type="submit" class="add-btn">
-                            Add Project
-                        </button>
-
-                        <button
-                            type="button"
-                            class="cancel-btn"
-                            onclick="location.href='/home'">
-                            Cancel
-                        </button>
-                    </div>
-
-                </form>
+                <input
+                    type="text"
+                    id="course_name"
+                    name="course_name"
+                    placeholder="e.g. Cyber Security"
+                    required>
 
             </div>
 
-        </div>
+            <div class="form-group">
+
+                <label for="semester">
+                    Semester
+                </label>
+
+                <input
+                    type="text"
+                    id="semester"
+                    name="semester"
+                    placeholder="e.g. 3rd Semester"
+                    required>
+
+            </div>
+
+            <div class="form-buttons">
+
+                <button
+                    type="submit"
+                    class="add-btn">
+                    Add Course
+                </button>
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="location.href='/home'">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 
-</body>
+</div>
+```
 
+</div>
+
+</body>
 </html>

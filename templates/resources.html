@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resources</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard">
+
+<div class="container">
+
+    <div class="sidebar">
+        <h3>🎓 Course Manager</h3>
+
+        <a href="/home">🏠 Dashboard</a>
+        <a href="/add">➕ Add Course</a>
+        <a href="/logout">🚪 Logout</a>
+    </div>
+
+    <div class="main">
+
+        <h2>Course Resources</h2>
+
+        {% for resource in resources %}
+
+        <div class="card">
+
+            <h3>{{ resource[0] }}</h3>
+
+            <p>{{ resource[1] }}</p>
+
+            <p>
+                Type: {{ resource[2] }}
+            </p>
+
+<a
+    href="{{ resource[3] }}"
+    target="_blank"
+    class="edit-btn">
+
+    Open Resource
+
+</a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
