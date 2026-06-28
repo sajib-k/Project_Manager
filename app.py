@@ -159,8 +159,46 @@ def resources(course_id):
     conn.close()
 
     return render_template(
-        'resources.html',
-        resources=resources
+    'resources.html',
+    resources=resources,
+    course_id=course_id
+)
+@app.route('/add_resource/<int:course_id>', methods=['GET', 'POST'])
+def add_resource(course_id):
+    if 'user_id' not in session:
+        return redirect('/')
+
+    if request.method == 'POST':
+
+        title = request.form['title']
+        description = request.form['description']
+        resource_type = request.form['resource_type']
+        resource_link = request.form['resource_link']
+
+        conn = get_db_connection()
+        c = conn.cursor()
+
+        c.execute("""
+            INSERT INTO resources
+            (course_id, title, description, resource_type, resource_link)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (
+            course_id,
+            title,
+            description,
+            resource_type,
+            resource_link
+        ))
+
+        conn.commit()
+        c.close()
+        conn.close()
+
+        return redirect(f'/resources/{course_id}')
+
+    return render_template(
+        'add_resource.html',
+        course_id=course_id
     )
 
 if __name__ == '__main__':

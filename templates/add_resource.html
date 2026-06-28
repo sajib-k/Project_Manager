@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Resource</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard">
+
+<div class="container">
+
+    <div class="sidebar">
+        <h3>🎓 Course Manager</h3>
+
+        <a href="/home">🏠 Dashboard</a>
+        <a href="/add">➕ Add Course</a>
+        <a href="/logout">🚪 Logout</a>
+    </div>
+
+    <div class="main">
+
+        <div class="topbar">
+            <h2>Add Resource</h2>
+        </div>
+
+        <div class="card">
+
+            <form method="POST">
+
+                <div class="form-group">
+                    <label>Resource Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Enter resource title"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea
+                        name="description"
+                        rows="4"
+                        placeholder="Enter resource description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Resource Type</label>
+                    <select name="resource_type">
+
+                        <option value="YouTube">
+                            YouTube
+                        </option>
+
+                        <option value="PDF">
+                            PDF
+                        </option>
+
+                        <option value="Link">
+                            Link
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Resource Link</label>
+                    <input
+                        type="url"
+                        name="resource_link"
+                        placeholder="https://..."
+                        required>
+                </div>
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="add-btn">
+                        Add Resource
+                    </button>
+
+                    <button
+                        type="button"
+                        class="delete-btn"
+                        onclick="history.back()">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -19,6 +19,11 @@
     <div class="main">
 
         <h2>Course Resources</h2>
+        <button
+    class="add-btn"
+    onclick="location.href='/add_resource/{{ course_id }}'">
+    + Add Resource
+</button>
 
         {% for resource in resources %}
 
