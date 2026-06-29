@@ -106,6 +106,17 @@ button {
     color: #000;
     font-weight: 600;
 }
+.topbar .add-btn {
+    width: auto;
+    margin-top: 0;
+    padding: 10px 20px;
+}
+
+.card-buttons .add-btn {
+    width: auto;
+    margin-top: 0;
+    padding: 8px 15px;
+}
 
 .login-btn:hover, .add-btn:hover {
     background: #a3e635;
@@ -225,7 +236,7 @@ body.dashboard .container {
 
 /* Sidebar */
 .sidebar {
-    width: 250px;
+    width: 280px;
     background: rgba(15, 23, 42, 0.95);
     padding: 20px;
     border-right: 1px solid #334155;
@@ -233,12 +244,13 @@ body.dashboard .container {
     flex-direction: column;
 }
 
-.sidebar h3 {
-    color: #84cc16;
-    margin-bottom: 30px;
-    font-size: 18px;
+.sidebar h3{
+    text-align:center;
+    padding-bottom:20px;
+    margin-bottom:20px;
+    border-bottom:1px solid #334155;
+    color:#84cc16;
 }
-
 .sidebar a {
     color: #cbd5e1;
     text-decoration: none;
@@ -254,14 +266,20 @@ body.dashboard .container {
     color: #84cc16;
     padding-left: 20px;
 }
+.sidebar a.active {
+    background: rgba(132, 204, 22, 0.15);
+    color: #84cc16;
+    border-left: 4px solid #84cc16;
+    font-weight: 600;
+}
 
 /* Main Content */
 .main {
     flex: 1;
     padding: 30px;
     overflow-y: auto;
+    max-width: 1400px;
 }
-
 .topbar {
     display: flex;
     justify-content: space-between;
@@ -286,19 +304,28 @@ body.dashboard .container {
 
 /* Cards */
 .card {
-    background: rgba(30, 41, 59, 0.8);
+    background: #1e293b;
     border: 1px solid #334155;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 24px;
+    border-radius: 16px;
     margin-bottom: 20px;
     color: white;
     transition: all 0.3s ease;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    
+    overflow: hidden;
+    position: relative;
 }
 
 .card:hover {
-    background: rgba(30, 41, 59, 0.95);
+    transform: translateY(-5px);
+
     border-color: #84cc16;
-    box-shadow: 0 0 20px rgba(132, 204, 22, 0.2);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(132, 204, 22, 0.25);
 }
 
 .card h3 {
@@ -315,6 +342,10 @@ body.dashboard .container {
 .card-buttons {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+}
+.card-buttons button {
+    flex: 1;
 }
 
 .edit-btn, .delete-btn {

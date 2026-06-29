@@ -11,14 +11,36 @@
 
 <div class="container">
 
+    <!-- Sidebar -->
     <div class="sidebar">
-        <h3>🎓 Course Manager</h3>
+
+        <h3>📚 Course Resource Manager</h3>
 
         <a href="/home">🏠 Dashboard</a>
-        <a href="/add">➕ Add Course</a>
+
+        <a href="/home">📚 Courses</a>
+
+        <a href="#" class="active">📁 Resources</a>
+
+        <a href="#">⬆️ Upload Resource</a>
+
+        <a href="#">🔍 Search Resources</a>
+
+        <a href="#">📝 Notes</a>
+
+        <a href="#">⭐ Favorites</a>
+
+        <a href="#">🗑️ Trash</a>
+
+        <hr style="border:1px solid #334155; margin:20px 0;">
+
+        <a href="#">⚙️ Settings</a>
+
         <a href="/logout">🚪 Logout</a>
+
     </div>
 
+    <!-- Main Content -->
     <div class="main">
 
         <div class="topbar">
@@ -30,45 +52,46 @@
             <form method="POST">
 
                 <div class="form-group">
-                    <label>Resource Title</label>
+                    <label for="title">Resource Title</label>
+
                     <input
                         type="text"
+                        id="title"
                         name="title"
                         placeholder="Enter resource title"
                         required>
                 </div>
 
                 <div class="form-group">
-                    <label>Description</label>
+                    <label for="description">Description</label>
+
                     <textarea
+                        id="description"
                         name="description"
                         rows="4"
                         placeholder="Enter resource description"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Resource Type</label>
-                    <select name="resource_type">
+                    <label for="resource_type">Resource Type</label>
 
-                        <option value="YouTube">
-                            YouTube
-                        </option>
+                    <select
+                        id="resource_type"
+                        name="resource_type">
 
-                        <option value="PDF">
-                            PDF
-                        </option>
-
-                        <option value="Link">
-                            Link
-                        </option>
+                        <option value="YouTube">YouTube</option>
+                        <option value="PDF">PDF</option>
+                        <option value="Link">Link</option>
 
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Resource Link</label>
+                    <label for="resource_link">Resource Link</label>
+
                     <input
                         type="url"
+                        id="resource_link"
                         name="resource_link"
                         placeholder="https://..."
                         required>
@@ -84,7 +107,7 @@
 
                     <button
                         type="button"
-                        class="delete-btn"
+                        class="cancel-btn"
                         onclick="history.back()">
                         Cancel
                     </button>

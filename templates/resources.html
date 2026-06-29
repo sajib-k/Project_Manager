@@ -1,58 +1,128 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-    <title>Resources</title>
+    <meta charset="UTF-8">
+    <title>Course Resources</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body class="dashboard">
 
 <div class="container">
 
+    <!-- Sidebar -->
     <div class="sidebar">
-        <h3>🎓 Course Manager</h3>
+
+        <h3>📚 Course Resource Manager</h3>
 
         <a href="/home">🏠 Dashboard</a>
-        <a href="/add">➕ Add Course</a>
+        <a href="/home" class="active">📚 Courses</a>
         <a href="/logout">🚪 Logout</a>
+
     </div>
 
+    <!-- Main Content -->
     <div class="main">
 
-        <h2>Course Resources</h2>
-        <button
-    class="add-btn"
-    onclick="location.href='/add_resource/{{ course_id }}'">
-    + Add Resource
-</button>
+<div class="topbar">
 
-        {% for resource in resources %}
-
-        <div class="card">
-
-            <h3>{{ resource[0] }}</h3>
-
-            <p>{{ resource[1] }}</p>
-
-            <p>
-                Type: {{ resource[2] }}
-            </p>
-
-<a
-    href="{{ resource[3] }}"
-    target="_blank"
-    class="edit-btn">
-
-    Open Resource
-
-</a>
-
-        </div>
-
-        {% endfor %}
-
+    <div>
+        <h2>{{ course[0] }}</h2>
+        <p style="color:#94a3b8;">
+            {{ course[1] }}
+        </p>
     </div>
 
+    <button
+        class="add-btn"
+        onclick="location.href='/add_resource/{{ course_id }}'">
+        + Add Resource
+    </button>
+
 </div>
+
+<form method="GET" action="/resources/{{ course_id }}">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search Resource..."
+        value="{{ search if search else '' }}">
+
+    <button
+        type="submit"
+        class="add-btn">
+        Search
+    </button>
+
+</form>
+
+<br>
+
+{% if resources %}
+
+{% for resource in resources %}
+
+
+<div class="card">
+
+<h3>{{ resource[1] }}</h3>
+
+<p>{{ resource[2] }}</p>
+
+<p>
+    <strong>Type:</strong>
+    {{ resource[3] }}
+</p>
+
+<p>
+    <strong>Link:</strong>
+    <a href="{{ resource[4] }}"
+       target="_blank"
+       class="project-link">
+       {{ resource[4] }}
+    </a>
+</p>
+
+<div class="card-buttons">
+
+    <a href="{{ resource[4] }}"
+       target="_blank"
+       class="edit-btn">
+       Open Resource
+    </a>
+
+    <a href="/edit_resource/{{ resource[0] }}/{{ course_id }}"
+       class="edit-btn">
+       Edit
+    </a>
+
+    <a href="/delete_resource/{{ resource[0] }}/{{ course_id }}"
+       class="delete-btn"
+       onclick="return confirm('Delete this resource?')">
+       Delete
+    </a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="card">
+    <h3>No Resources Found</h3>
+    <p>Add your first resource for this course.</p>
+</div>
+
+{% endif %}
+
+</div>   <!-- main -->
+
+</div>   <!-- container -->
 
 </body>
 </html>

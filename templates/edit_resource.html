@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Resource</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard">
+
+<div class="container">
+
+```
+<div class="sidebar">
+
+    <h3>📚 Course Resource Manager</h3>
+
+    <a href="/home">🏠 Dashboard</a>
+    <a href="/logout">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <h2>Edit Resource</h2>
+    </div>
+
+    <div class="card">
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Resource Title</label>
+                <input
+                    type="text"
+                    name="title"
+                    value="{{ resource[0] }}"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea
+                    name="description"
+                    rows="4">{{ resource[1] }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Resource Type</label>
+
+                <select name="resource_type">
+
+                    <option value="YouTube"
+                        {% if resource[2] == 'YouTube' %}selected{% endif %}>
+                        YouTube
+                    </option>
+
+                    <option value="PDF"
+                        {% if resource[2] == 'PDF' %}selected{% endif %}>
+                        PDF
+                    </option>
+
+                    <option value="Link"
+                        {% if resource[2] == 'Link' %}selected{% endif %}>
+                        Link
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label>Resource Link</label>
+                <input
+                    type="url"
+                    name="resource_link"
+                    value="{{ resource[3] }}"
+                    required>
+            </div>
+
+            <div class="form-buttons">
+
+                <button
+                    type="submit"
+                    class="add-btn">
+                    Save Changes
+                </button>
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="location.href='/resources/{{ course_id }}'">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+</body>
+</html>

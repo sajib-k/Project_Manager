@@ -138,20 +138,63 @@ def delete(course_id):
 
 @app.route('/resources/<int:course_id>')
 def resources(course_id):
+
     if 'user_id' not in session:
         return redirect('/')
 
     conn = get_db_connection()
     c = conn.cursor()
 
-    c.execute(
-        """
-        SELECT title, description, resource_type, resource_link
-        FROM resources
-        WHERE course_id = %s
-        """,
-        (course_id,)
-    )
+    # Course Info
+    c.execute("""
+        SELECT course_name, semester
+        FROM courses
+        WHERE id = %s
+    """, (course_id,))
+
+    course = c.fetchone()
+
+    # Search Value
+    search = request.args.get('search', '')
+
+    # Resource List
+    if search:
+
+        c.execute("""
+            SELECT
+                id,
+                title,
+                description,
+                resource_type,
+                resource_link
+            FROM resources
+            WHERE course_id = %s
+              AND (
+                    title ILIKE %s
+                    OR description ILIKE %s
+                    OR resource_type ILIKE %s
+              )
+            ORDER BY id DESC
+        """, (
+            course_id,
+            f'%{search}%',
+            f'%{search}%',
+            f'%{search}%'
+        ))
+
+    else:
+
+        c.execute("""
+            SELECT
+                id,
+                title,
+                description,
+                resource_type,
+                resource_link
+            FROM resources
+            WHERE course_id = %s
+            ORDER BY id DESC
+        """, (course_id,))
 
     resources = c.fetchall()
 
@@ -159,10 +202,12 @@ def resources(course_id):
     conn.close()
 
     return render_template(
-    'resources.html',
-    resources=resources,
-    course_id=course_id
-)
+        'resources.html',
+        resources=resources,
+        course=course,
+        course_id=course_id,
+        search=search
+    )
 @app.route('/add_resource/<int:course_id>', methods=['GET', 'POST'])
 def add_resource(course_id):
     if 'user_id' not in session:
@@ -200,6 +245,139 @@ def add_resource(course_id):
         'add_resource.html',
         course_id=course_id
     )
+@app.route('/edit_resource/<int:resource_id>/<int:course_id>',
+           methods=['GET', 'POST'])
+def edit_resource(resource_id, course_id):
+
+    if 'user_id' not in session:
+        return redirect('/')
+
+    conn = get_db_connection()
+    c = conn.cursor()
+
+    if request.method == 'POST':
+
+        title = request.form['title']
+        description = request.form['description']
+        resource_type = request.form['resource_type']
+        resource_link = request.form['resource_link']
+
+        c.execute("""
+            UPDATE resources
+            SET title = %s,
+                description = %s,
+                resource_type = %s,
+                resource_link = %s
+            WHERE id = %s
+        """, (
+            title,
+            description,
+            resource_type,
+            resource_link,
+            resource_id
+        ))
+
+        conn.commit()
+
+        c.close()
+        conn.close()
+
+        return redirect(f'/resources/{course_id}')
+
+    c.execute("""
+        SELECT title,
+               description,
+               resource_type,
+               resource_link
+        FROM resources
+        WHERE id = %s
+    """, (resource_id,))
+
+    resource = c.fetchone()
+
+    c.close()
+    conn.close()
+
+    return render_template(
+        'edit_resource.html',
+        resource=resource,
+        resource_id=resource_id,
+        course_id=course_id
+    )
+@app.route('/edit_course/<int:course_id>', methods=['GET', 'POST'])
+def edit_course(course_id):
+
+    if 'user_id' not in session:
+        return redirect('/')
+
+    conn = get_db_connection()
+    c = conn.cursor()
+
+    if request.method == 'POST':
+
+        course_name = request.form['course_name']
+        semester = request.form['semester']
+
+        c.execute("""
+            UPDATE courses
+            SET course_name = %s,
+                semester = %s
+            WHERE id = %s
+              AND user_id = %s
+        """, (
+            course_name,
+            semester,
+            course_id,
+            session['user_id']
+        ))
+
+        conn.commit()
+
+        c.close()
+        conn.close()
+
+        return redirect('/home')
+
+    c.execute("""
+        SELECT course_name, semester
+        FROM courses
+        WHERE id = %s
+          AND user_id = %s
+    """, (
+        course_id,
+        session['user_id']
+    ))
+
+    course = c.fetchone()
+
+    c.close()
+    conn.close()
+
+    return render_template(
+        'edit_course.html',
+        course=course,
+        course_id=course_id
+    )
+@app.route('/delete_resource/<int:resource_id>/<int:course_id>')
+def delete_resource(resource_id, course_id):
+
+    if 'user_id' not in session:
+        return redirect('/')
+
+    conn = get_db_connection()
+    c = conn.cursor()
+
+    c.execute("""
+        DELETE FROM resources
+        WHERE id = %s
+    """, (resource_id,))
+
+    conn.commit()
+
+    c.close()
+    conn.close()
+
+    return redirect(f'/resources/{course_id}')
 
 if __name__ == '__main__':
     app.run(debug=True)
